@@ -63,7 +63,7 @@ public class ConnectivityGrid extends ConnectivityOptimizer {
 	private static int worldSizeY;
 	private static int cellSizeMultiplier;
 
-	static HashMap<Integer,ConnectivityGrid> gridobjects;
+	protected static HashMap<String, ConnectivityGrid> grids;
 
 	static {
 		DTNSim.registerForReset(ConnectivityGrid.class.getCanonicalName());
@@ -71,7 +71,7 @@ public class ConnectivityGrid extends ConnectivityOptimizer {
 	}
 
 	public static void reset() {
-		gridobjects = new HashMap<Integer, ConnectivityGrid>();
+		grids = new HashMap<String, ConnectivityGrid>();
 
 		Settings s = new Settings(MovementModel.MOVEMENT_MODEL_NS);
 		int [] worldSize = s.getCsvInts(MovementModel.WORLD_SIZE,2);
@@ -113,23 +113,19 @@ public class ConnectivityGrid extends ConnectivityOptimizer {
 	}
 
 	/**
-	 * Returns a connectivity grid object based on a hash value
-	 * @param key A hash value that separates different interfaces from each other
+	 * Returns the connectivity grid object for a given interface type
+	 * @param interfaceType A string that distinguishes different interfaces from each other
 	 * @param maxRange Maximum range used by the radio technology using this
 	 *  connectivity grid.
 	 * @return The connectivity grid object for a specific interface
 	 */
-	public static ConnectivityGrid ConnectivityGridFactory(int key,
-			double maxRange) {
-		if (gridobjects.containsKey((Integer)key)) {
-			return (ConnectivityGrid)gridobjects.get((Integer)key);
-		} else {
-			ConnectivityGrid newgrid =
-				new ConnectivityGrid((int)Math.ceil(maxRange *
-						cellSizeMultiplier));
-			gridobjects.put((Integer)key,newgrid);
-			return newgrid;
+	public static ConnectivityGrid getGrid(String interfaceType, double maxRange) {
+		ConnectivityGrid grid = grids.get(interfaceType);
+		if (grid == null) {
+			grid = new ConnectivityGrid((int)Math.ceil(maxRange * cellSizeMultiplier));
+			grids.put(interfaceType, grid);
 		}
+		return grid;
 	}
 
 	/**

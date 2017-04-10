@@ -27,6 +27,7 @@ abstract public class NetworkInterface implements ModuleCommunicationListener {
 	public static final String SCAN_INTERVAL_S = "scanInterval";
 	/** bidirectional connections -setting id ({@value})*/
 	public static final String BIDI_CONN_S = "bidirectionalConnections";
+	public static final String INTERFACE_TYPE_S = "interfaceType";
 
 	/**
 	 * Sub-namespace for the network related settings in the Group namespace
@@ -169,8 +170,7 @@ abstract public class NetworkInterface implements ModuleCommunicationListener {
 		}
 
 		if (transmitRange > 0) {
-			optimizer = ConnectivityGrid.ConnectivityGridFactory(
-					this.interfacetype.hashCode(), transmitRange);
+			optimizer = ConnectivityGrid.getGrid(this.interfacetype, transmitRange);
 			optimizer.addInterface(this);
 		} else {
 			optimizer = null;
