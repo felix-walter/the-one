@@ -19,6 +19,13 @@ public interface MovementListener {
 	public void newDestination(DTNHost host, Coord destination, double speed);
 
 	/**
+	 * Method is called every time the location of a host actually changes
+	 * @param host The host that got a new location
+	 * @param location Coordinates of the new location
+	 */
+	default void newLocation(DTNHost host, Coord location) {}
+
+	/**
 	 * Method is called when a host receives its initial location from
 	 * movement model.
 	 * @param host The host that got the location
