@@ -13,26 +13,48 @@ import util.LEOSatelliteVisibilityCalculator;
 public class SatelliteInterface extends SimpleBroadcastInterface {
 
 	private static final String SATELLITE_ALTITUDE_S  = "altitude";
+	public static final String ISL_ACTIVE_S = "islActive";
+	public static final String ISL_RANGE_S = "islRange";
 
 	protected double altitude;
+	protected boolean islActive;
+	protected double islRange;
 
 	public SatelliteInterface(Settings s) {
 		super(s);
-		altitude = s.getDouble(SATELLITE_ALTITUDE_S);
+		this.altitude = s.getDouble(SATELLITE_ALTITUDE_S);
+		this.islActive = s.getBoolean(ISL_ACTIVE_S, false);
+		this.islRange = s.getDouble(ISL_RANGE_S, 0.0);
 	}
 
 	public SatelliteInterface(SatelliteInterface ni) {
 		super(ni);
-		altitude = ni.altitude;
+		this.altitude = ni.altitude;
+		this.islActive = ni.islActive;
+		this.islRange = ni.islRange;
 	}
 
 	@Override
 	protected boolean isWithinRange(NetworkInterface anotherInterface) {
-		return anotherInterface instanceof GroundStationInterface &&
-				LEOSatelliteVisibilityCalculator.isWithinRange(
-					this.host.getLocation(), this.altitude,
+		if (anotherInterface instanceof GroundStationInterface)
+			return LEOSatelliteVisibilityCalculator.isWithinRange(
+				this.host.getLocation(),
+				this.altitude,
+				anotherInterface.getHost().getLocation(),
+				((GroundStationInterface)anotherInterface).getMinElevation()
+			);
+		else if (anotherInterface instanceof SatelliteInterface && this.islActive &&
+				 ((SatelliteInterface)anotherInterface).isISLActive())
+			return LEOSatelliteVisibilityCalculator.isWithinISLRange(
+					this.host.getLocation(),
+					this.altitude,
+					this.islRange,
 					anotherInterface.getHost().getLocation(),
-					((GroundStationInterface) anotherInterface).getMinElevation());
+					((SatelliteInterface)anotherInterface).getAltitude(),
+					((SatelliteInterface)anotherInterface).getISLRange()
+			);
+		else
+			return false;
 	}
 
 	@Override
@@ -42,5 +64,13 @@ public class SatelliteInterface extends SimpleBroadcastInterface {
 
 	public double getAltitude() {
 		return altitude;
+	}
+
+	public boolean isISLActive() {
+		return this.islActive;
+	}
+
+	public double getISLRange() {
+		return this.islRange;
 	}
 }

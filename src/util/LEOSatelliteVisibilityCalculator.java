@@ -40,6 +40,25 @@ public final class LEOSatelliteVisibilityCalculator {
 	}
 
 	/**
+	 * Returns a value indicating whether the given satellite is within
+	 * radio range for an inter-satellite link with the given other satellite.
+	 */
+	public static boolean isWithinISLRange(Coord sat1_coords, double sat1_altitude,
+										   double sat1_isl_range,
+										   Coord sat2_coords, double sat2_altitude,
+										   double sat2_isl_range) {
+		Vector3D sat1_pos = LEOSatelliteVisibilityCalculator.getECEFCoordinates(
+				sat1_coords, sat1_altitude);
+		Vector3D sat2_pos = LEOSatelliteVisibilityCalculator.getECEFCoordinates(
+				sat2_coords, sat2_altitude);
+		double xdiff = sat1_pos.x - sat2_pos.x;
+		double ydiff = sat1_pos.y - sat2_pos.y;
+		double zdiff = sat1_pos.z - sat2_pos.z;
+		return (Math.sqrt(xdiff * xdiff + ydiff * ydiff + zdiff * zdiff) <=
+				Math.min(sat1_isl_range, sat2_isl_range));
+	}
+
+	/**
 	 * Gets the elevation angle of the given satellite over the horizon of
 	 * the ground station (in ECEF 3D coordinates)
 	 *
