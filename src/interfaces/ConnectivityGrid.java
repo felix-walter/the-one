@@ -53,15 +53,21 @@ public class ConnectivityGrid extends ConnectivityOptimizer {
 	public static final String CELL_SIZE_MULT_S = "cellSizeMult";
 	/** default value for cell size multiplier ({@value}) */
 	public static final int DEF_CON_CELL_SIZE_MULT = 5;
+	/**
+	 * Allows to completely disable grid optimization -setting id ({@value}).
+	 */
+	public static final String DISABLE_GRID_OPTIMIZATION_S = "disableGridOptimization";
 
 	private GridCell[][] cells;
 	private HashMap<NetworkInterface, GridCell> ginterfaces;
 	private int cellSize;
 	private int rows;
 	private int cols;
+
 	private static int worldSizeX;
 	private static int worldSizeY;
 	private static int cellSizeMultiplier;
+	private static boolean distanceOptimization;
 
 	protected static HashMap<String, ConnectivityGrid> grids;
 
@@ -90,6 +96,8 @@ public class ConnectivityGrid extends ConnectivityOptimizer {
 					") for " + World.OPTIMIZATION_SETTINGS_NS +
 					"." + CELL_SIZE_MULT_S);
 		}
+
+		distanceOptimization = !s.getBoolean(DISABLE_GRID_OPTIMIZATION_S, false);
 	}
 
 	/**
@@ -101,15 +109,18 @@ public class ConnectivityGrid extends ConnectivityOptimizer {
 		this.rows = worldSizeY/cellSize + 1;
 		this.cols = worldSizeX/cellSize + 1;
 		// leave empty cells on both sides to make neighbor search easier
-		this.cells = new GridCell[rows+2][cols+2];
 		this.cellSize = cellSize;
+		this.ginterfaces = new HashMap<NetworkInterface,GridCell>();
 
+		if (!distanceOptimization)
+			return;
+
+		this.cells = new GridCell[rows+2][cols+2];
 		for (int i=0; i<rows+2; i++) {
 			for (int j=0; j<cols+2; j++) {
 				this.cells[i][j] = new GridCell();
 			}
 		}
-		ginterfaces = new HashMap<NetworkInterface,GridCell>();
 	}
 
 	/**
@@ -133,8 +144,11 @@ public class ConnectivityGrid extends ConnectivityOptimizer {
 	 * @param ni The new network interface
 	 */
 	public void addInterface(NetworkInterface ni) {
-		GridCell c = cellFromCoord(ni.getLocation());
-		c.addInterface(ni);
+		GridCell c = null;
+		if (distanceOptimization) {
+			c = cellFromCoord(ni.getLocation());
+			c.addInterface(ni);
+		}
 		ginterfaces.put(ni,c);
 	}
 
@@ -143,9 +157,11 @@ public class ConnectivityGrid extends ConnectivityOptimizer {
 	 * @param ni The interface to be removed
 	 */
 	public void removeInterface(NetworkInterface ni) {
-		GridCell c = ginterfaces.get(ni);
-		if (c != null) {
-			c.removeInterface(ni);
+		if (distanceOptimization) {
+			GridCell c = ginterfaces.get(ni);
+			if (c != null) {
+				c.removeInterface(ni);
+			}
 		}
 		ginterfaces.remove(ni);
 	}
@@ -165,7 +181,14 @@ public class ConnectivityGrid extends ConnectivityOptimizer {
 	 * @param ni The interface to update
 	 */
 	public void updateLocation(NetworkInterface ni) {
+		if (!distanceOptimization)
+			return;
+
 		GridCell oldCell = (GridCell)ginterfaces.get(ni);
+		if (oldCell == null) {
+			return;
+		}
+
 		GridCell newCell = cellFromCoord(ni.getLocation());
 
 		if (newCell != oldCell) {
@@ -232,6 +255,9 @@ public class ConnectivityGrid extends ConnectivityOptimizer {
 	 */
 	public Collection<NetworkInterface> getNearInterfaces(
 			NetworkInterface ni) {
+		if (!distanceOptimization)
+			return (Collection<NetworkInterface>)ginterfaces.keySet();
+
 		ArrayList<NetworkInterface> niList = new ArrayList<NetworkInterface>();
 		GridCell loc = (GridCell)ginterfaces.get(ni);
 
