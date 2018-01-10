@@ -76,6 +76,8 @@ public class SimMenuBar extends JMenuBar implements ActionListener {
 	public static final String SHOW_BUFFER_S = "showMessageBuffer";
 	/** Show node connections -setting id ({@value})*/
 	public static final String FOCUS_ON_CLICK_S = "focusOnClick";
+	/** Show underlay image -setting id ({@value})*/
+	public static final String SHOW_UNDERLAY_S = "showUnderlayImage";
 	/** The namespace where underlay image -related settings are found */
 	public static final String UNDERLAY_NS = "GUI.UnderlayImage";
 
@@ -95,7 +97,7 @@ public class SimMenuBar extends JMenuBar implements ActionListener {
 		if (settings.contains("fileName")) {
 			// create underlay image menu item only if filename is specified
 			enableBgImage = createCheckItem(pfMenu,"Show underlay image",
-					false, null);
+					false, SHOW_UNDERLAY_S);
 		}
 
 		settings.setNameSpace(gui.MainWindow.GUI_NS);
@@ -176,6 +178,7 @@ public class SimMenuBar extends JMenuBar implements ActionListener {
 		field.setShowMapGraphic(enableMapGraphic.isSelected());
 		field.setAutoClearOverlay(autoClearOverlay.isSelected());
 		field.setFocusOnClick(focusOnClick.isSelected());
+		toggleUnderlayImage();
 	}
 
 	private String getFilterString(String message) {
