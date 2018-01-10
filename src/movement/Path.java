@@ -138,4 +138,8 @@ public class Path  {
 	public List<Double> getSpeeds() {
 		return this.speeds;
 	}
+
+	public void setWaypointIndex(int index) {
+		nextWpIndex = index;
+	}
 }
