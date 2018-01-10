@@ -93,7 +93,10 @@ abstract public class NetworkInterface implements ModuleCommunicationListener {
 	 * For creating an empty class of a specific type
 	 */
 	public NetworkInterface(Settings s) {
-		this.interfacetype = s.getNameSpace();
+		this.interfacetype = s.getSetting(INTERFACE_TYPE_S, null);
+		if (this.interfacetype == null) {
+			this.interfacetype = s.getNameSpace();
+		}
 		this.connections = new ArrayList<Connection>();
 
 		this.transmitRange = s.getDouble(TRANSMIT_RANGE_S, this.getDefaultTransmitRange());
