@@ -1,0 +1,7 @@
+name: 32789
+elevation: 548.823 km
+covered distance: 577748 km
+speed: 24072.866166446827 km/h
+duration: 86400 s
+heading direction: right to left
+timeDiff: 30 s

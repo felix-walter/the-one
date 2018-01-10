@@ -1,0 +1,7 @@
+name: 27844
+elevation: 828.061 km
+covered distance: 539448 km
+speed: 22477.009699506834 km/h
+duration: 86400 s
+heading direction: right to left
+timeDiff: 30 s

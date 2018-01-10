@@ -1,0 +1,7 @@
+name: 28895
+elevation: 692.622 km
+covered distance: 569186 km
+speed: 23716.122406474824 km/h
+duration: 86400 s
+heading direction: right to left
+timeDiff: 30 s

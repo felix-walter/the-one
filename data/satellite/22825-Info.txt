@@ -1,0 +1,7 @@
+name: 22825
+elevation: 810.32 km
+covered distance: 538693 km
+speed: 22445.56902534391 km/h
+duration: 86400 s
+heading direction: right to left
+timeDiff: 30 s

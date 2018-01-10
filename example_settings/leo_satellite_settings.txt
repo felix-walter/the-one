@@ -1,0 +1,224 @@
+# LEO satellite test scenario
+
+Scenario.name = sat_scenario_%%Group.router%%
+Scenario.simulateConnections = true
+Scenario.updateInterval = 1
+Scenario.endTime = 86400
+Scenario.nrofHostGroups = 15
+
+Optimization.disableGridOptimization = true
+
+Group.router = [EpidemicRouter]
+Group.bufferSize = 2000M
+Group.speed = 1,1
+Group.msgTtl = 3000
+Group.nrofHosts = 1
+Group.nrofInterfaces = 1
+
+Sat228252Interface.type = SatelliteInterface
+Sat228252Interface.transmitSpeed = 15k
+Sat228252Interface.transmitRange = 281
+Sat228252Interface.altitude = 810320
+Sat228252Interface.interfaceType = GsSat
+
+Group1.groupID = 22825
+Group1.movementModel = SatelliteMovement
+Group1.routeFile = data/satellite/22825.wkt
+Group1.routeType = 1
+Group1.timePerStep = 30
+Group1.interface1 = Sat228252Interface
+
+Sat288954Interface.type = SatelliteInterface
+Sat288954Interface.transmitSpeed = 15k
+Sat288954Interface.transmitRange = 261
+Sat288954Interface.altitude = 692622
+Sat288954Interface.interfaceType = GsSat
+
+Group2.groupID = 28895
+Group2.movementModel = SatelliteMovement
+Group2.routeFile = data/satellite/28895.wkt
+Group2.routeType = 1
+Group2.timePerStep = 30
+Group2.interface1 = Sat288954Interface
+
+Sat278446Interface.type = SatelliteInterface
+Sat278446Interface.transmitSpeed = 15k
+Sat278446Interface.transmitRange = 284
+Sat278446Interface.altitude = 828061
+Sat278446Interface.interfaceType = GsSat
+
+Group3.groupID = 27844
+Group3.movementModel = SatelliteMovement
+Group3.routeFile = data/satellite/27844.wkt
+Group3.routeType = 1
+Group3.timePerStep = 30
+Group3.interface1 = Sat278446Interface
+
+Sat278488Interface.type = SatelliteInterface
+Sat278488Interface.transmitSpeed = 15k
+Sat278488Interface.transmitRange = 286
+Sat278488Interface.altitude = 836571
+Sat278488Interface.interfaceType = GsSat
+
+Group4.groupID = 27848
+Group4.movementModel = SatelliteMovement
+Group4.routeFile = data/satellite/27848.wkt
+Group4.routeType = 1
+Group4.timePerStep = 30
+Group4.interface1 = Sat278488Interface
+
+Sat3278910Interface.type = SatelliteInterface
+Sat3278910Interface.transmitSpeed = 15k
+Sat3278910Interface.transmitRange = 232
+Sat3278910Interface.altitude = 548823
+Sat3278910Interface.interfaceType = GsSat
+
+Group5.groupID = 32789
+Group5.movementModel = SatelliteMovement
+Group5.routeFile = data/satellite/32789.wkt
+Group5.routeType = 1
+Group5.timePerStep = 30
+Group5.interface1 = Sat3278910Interface
+
+bs11Interface.type = GroundStationInterface
+bs11Interface.transmitSpeed = 15k
+bs11Interface.transmitRange = 286
+bs11Interface.interfaceType = GsSat
+bs11Interface.minElevation = 10
+
+Group6.groupID = bs
+Group6.movementModel = StationaryMovement
+Group6.nodeLocation = 1007,1902
+Group6.interface1 = bs11Interface
+
+bs12Interface.type = GroundStationInterface
+bs12Interface.transmitSpeed = 15k
+bs12Interface.transmitRange = 286
+bs12Interface.interfaceType = GsSat
+bs12Interface.minElevation = 10
+
+Group7.groupID = bs
+Group7.movementModel = StationaryMovement
+Group7.nodeLocation = 3416,570
+Group7.interface1 = bs12Interface
+
+bs13Interface.type = GroundStationInterface
+bs13Interface.transmitSpeed = 15k
+bs13Interface.transmitRange = 286
+bs13Interface.interfaceType = GsSat
+bs13Interface.minElevation = 10
+
+Group8.groupID = bs
+Group8.movementModel = StationaryMovement
+Group8.nodeLocation = 2623,568
+Group8.interface1 = bs13Interface
+
+bs14Interface.type = GroundStationInterface
+bs14Interface.transmitSpeed = 15k
+bs14Interface.transmitRange = 286
+bs14Interface.interfaceType = GsSat
+bs14Interface.minElevation = 10
+
+Group9.groupID = bs
+Group9.movementModel = StationaryMovement
+Group9.nodeLocation = 2306,739
+Group9.interface1 = bs14Interface
+
+bs15Interface.type = GroundStationInterface
+bs15Interface.transmitSpeed = 15k
+bs15Interface.transmitRange = 286
+bs15Interface.interfaceType = GsSat
+bs15Interface.minElevation = 10
+
+Group10.groupID = bs
+Group10.movementModel = StationaryMovement
+Group10.nodeLocation = 1224,1357
+Group10.interface1 = bs15Interface
+
+bs16Interface.type = GroundStationInterface
+bs16Interface.transmitSpeed = 15k
+bs16Interface.transmitRange = 286
+bs16Interface.interfaceType = GsSat
+bs16Interface.minElevation = 10
+
+Group11.groupID = bs
+Group11.movementModel = StationaryMovement
+Group11.nodeLocation = 1060,875
+Group11.interface1 = bs16Interface
+
+bs17Interface.type = GroundStationInterface
+bs17Interface.transmitSpeed = 15k
+bs17Interface.transmitRange = 286
+bs17Interface.interfaceType = GsSat
+bs17Interface.minElevation = 10
+
+Group12.groupID = bs
+Group12.movementModel = StationaryMovement
+Group12.nodeLocation = 565,1868
+Group12.interface1 = bs17Interface
+
+bs18Interface.type = GroundStationInterface
+bs18Interface.transmitSpeed = 15k
+bs18Interface.transmitRange = 286
+bs18Interface.interfaceType = GsSat
+bs18Interface.minElevation = 10
+
+Group13.groupID = bs
+Group13.movementModel = StationaryMovement
+Group13.nodeLocation = 2451,1846
+Group13.interface1 = bs18Interface
+
+bs19Interface.type = GroundStationInterface
+bs19Interface.transmitSpeed = 15k
+bs19Interface.transmitRange = 286
+bs19Interface.interfaceType = GsSat
+bs19Interface.minElevation = 10
+
+Group14.groupID = bs
+Group14.movementModel = StationaryMovement
+Group14.nodeLocation = 3228,598
+Group14.interface1 = bs19Interface
+
+bs20Interface.type = GroundStationInterface
+bs20Interface.transmitSpeed = 15k
+bs20Interface.transmitRange = 286
+bs20Interface.interfaceType = GsSat
+bs20Interface.minElevation = 10
+
+Group15.groupID = bs
+Group15.movementModel = StationaryMovement
+Group15.nodeLocation = 2411,625
+Group15.interface1 = bs20Interface
+
+Events.nrof = 1
+Events1.class = MessageEventGenerator
+Events1.interval = 10,30
+Events1.size = 500k,1M
+Events1.hosts = 5,15
+Events1.prefix = M
+
+MovementModel.rngSeed = 1
+MovementModel.worldSize = 4007,2000
+MovementModel.warmup = 0
+
+MapBasedMovement.nrofMapFiles = 5
+MapBasedMovement.mapFile1 = data/satellite/28895.wkt
+MapBasedMovement.mapFile2 = data/satellite/22825.wkt
+MapBasedMovement.mapFile3 = data/satellite/27844.wkt
+MapBasedMovement.mapFile4 = data/satellite/27848.wkt
+MapBasedMovement.mapFile5 = data/satellite/32789.wkt
+
+Report.nrofReports = 2
+Report.warmup = 0
+Report.reportDir = reports/
+Report.report1 = MessageStatsReport
+Report.report2 = ContactTimesReport
+
+GUI.UnderlayImage.fileName = data/satellite/world_map.png
+GUI.UnderlayImage.offset = 0,0
+GUI.UnderlayImage.scale = 3
+GUI.UnderlayImage.rotate = 0.0
+GUI.EventLogPanel.nrofEvents = 100
+GUI.showNodeRadioCoverages = false
+GUI.showMapGraphic = false
+GUI.showUnderlayImage = true
