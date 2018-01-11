@@ -207,6 +207,7 @@ MapBasedMovement.mapFile2 = data/satellite/22825.wkt
 MapBasedMovement.mapFile3 = data/satellite/27844.wkt
 MapBasedMovement.mapFile4 = data/satellite/27848.wkt
 MapBasedMovement.mapFile5 = data/satellite/32789.wkt
+MapBasedMovement.disableMirroring = true
 
 Report.nrofReports = 2
 Report.warmup = 0
