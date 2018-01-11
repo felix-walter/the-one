@@ -80,6 +80,9 @@ Group5.routeType = 1
 Group5.timePerStep = 30
 Group5.interface1 = Sat3278910Interface
 
+internetInterface.type = InternetInterface
+internetInterface.transmitSpeed = 250k
+
 bs11Interface.type = GroundStationInterface
 bs11Interface.transmitSpeed = 15k
 bs11Interface.transmitRange = 286
@@ -89,7 +92,9 @@ bs11Interface.minElevation = 10
 Group6.groupID = bs
 Group6.movementModel = StationaryMovement
 Group6.nodeLocation = 1007,1902
+Group6.nrofInterfaces = 2
 Group6.interface1 = bs11Interface
+Group6.interface2 = internetInterface
 
 bs12Interface.type = GroundStationInterface
 bs12Interface.transmitSpeed = 15k
@@ -100,7 +105,9 @@ bs12Interface.minElevation = 10
 Group7.groupID = bs
 Group7.movementModel = StationaryMovement
 Group7.nodeLocation = 3416,570
+Group7.nrofInterfaces = 2
 Group7.interface1 = bs12Interface
+Group7.interface2 = internetInterface
 
 bs13Interface.type = GroundStationInterface
 bs13Interface.transmitSpeed = 15k
@@ -111,7 +118,9 @@ bs13Interface.minElevation = 10
 Group8.groupID = bs
 Group8.movementModel = StationaryMovement
 Group8.nodeLocation = 2623,568
+Group8.nrofInterfaces = 2
 Group8.interface1 = bs13Interface
+Group8.interface2 = internetInterface
 
 bs14Interface.type = GroundStationInterface
 bs14Interface.transmitSpeed = 15k
