@@ -16,7 +16,6 @@ import core.Coord;
  */
 public class SimMap implements Serializable {
 
-	private SimMap instance;
 	private Coord minBound;
 	private Coord maxBound;
 	/** list representation of the map for efficient list-returning */
@@ -30,10 +29,6 @@ public class SimMap implements Serializable {
 
 	/** is re-hash needed before using hash mode (some coordinates changed) */
 	private boolean needsRehash = false;
-
-	public synchronized SimMap getInstance() {
-		return instance;
-	}
 
 	public SimMap(Map<Coord, MapNode> nodes) {
 		this.offset = new Coord(0,0);
@@ -60,7 +55,6 @@ public class SimMap implements Serializable {
 	public MapNode getNodeByCoord(Coord c) {
 		if (needsRehash) { // some coordinates have changed after creating hash
 			nodesMap.clear();
-			// System.out.println("all nodes werden neu gesetzt");
 			for (MapNode node : getNodes()) {
 				nodesMap.put(node.getLocation(), node); // re-hash
 			}
@@ -147,8 +141,6 @@ public class SimMap implements Serializable {
 
 		for (MapNode n : nodes) {
 			c = n.getLocation();
-			if (c.getY() < 0)
-				System.out.println("coord with neg, x: " + c.getX() + " y: " + c.getY());
 			if (c.getX() < minX) {
 				minX = c.getX();
 			}
