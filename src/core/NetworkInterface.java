@@ -95,7 +95,7 @@ abstract public class NetworkInterface implements ModuleCommunicationListener {
 		this.interfacetype = s.getNameSpace();
 		this.connections = new ArrayList<Connection>();
 
-		this.transmitRange = s.getDouble(TRANSMIT_RANGE_S);
+		this.transmitRange = s.getDouble(TRANSMIT_RANGE_S, this.getDefaultTransmitRange());
 		this.transmitSpeed = s.getInt(TRANSMIT_SPEED_S);
 		ensurePositiveValue(transmitRange, TRANSMIT_RANGE_S);
 		ensurePositiveValue(transmitSpeed, TRANSMIT_SPEED_S);
@@ -142,6 +142,10 @@ abstract public class NetworkInterface implements ModuleCommunicationListener {
 	 * Replication function
 	 */
 	abstract public NetworkInterface replicate();
+
+	protected double getDefaultTransmitRange() {
+		return -1.0; // invalid value, may be overridden to not require the setting
+	}
 
 	/**
 	 * For setting the host - needed when a prototype is copied for several
