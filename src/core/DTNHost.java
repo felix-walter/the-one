@@ -10,7 +10,6 @@ import java.util.List;
 
 import movement.MovementModel;
 import movement.Path;
-import movement.SatelliteMovement;
 import routing.MessageRouter;
 import routing.util.RoutingInfo;
 
@@ -36,6 +35,9 @@ public class DTNHost implements Comparable<DTNHost> {
 	private List<MovementListener> movListeners;
 	private List<NetworkInterface> net;
 	private ModuleCommunicationBus comBus;
+
+	/** "Jump" to the first location on each new path provided via the movement instance */
+	protected static boolean jumpToInitialPathLocations = true;
 
 	static {
 		DTNSim.registerForReset(DTNHost.class.getCanonicalName());
@@ -396,20 +398,6 @@ public class DTNHost implements Comparable<DTNHost> {
 			possibleMovement -= distance;
 			if (!setNextWaypoint()) { // get a new waypoint
 				this.destination = null; // No more waypoints left, therefore the destination must be null
-
-				// for SatelliteMovement, the satellite shall be returned to the start
-				if (movement instanceof SatelliteMovement) {
-					// this should only be called if the path is empty
-					// since we adjust the path each round, we need to refresh
-					// it here, to get the correct initial position
-					if (path == null)
-						path = movement.getPath();
-					updateLocation(((SatelliteMovement) movement).getInitialPosition());
-					this.destination = ((SatelliteMovement) movement).getInitialPosition();
-
-					path.setWaypointIndex(2);
-				}
-
 				return; // no more waypoints left
 			}
 			distance = this.location.distance(this.destination);
@@ -432,6 +420,16 @@ public class DTNHost implements Comparable<DTNHost> {
 	private boolean setNextWaypoint() {
 		if (path == null) {
 			path = movement.getPath();
+			if (jumpToInitialPathLocations) {
+				// Snap to initial location of the new path
+				this.location.setLocation(path.getNextWaypoint());
+				this.speed = path.getSpeed();
+				if (this.movListeners != null) {
+					for (MovementListener l : this.movListeners) {
+						l.newLocation(this, this.location);
+					}
+				}
+			}
 		}
 
 		if (path == null || !path.hasNext()) {
@@ -450,38 +448,6 @@ public class DTNHost implements Comparable<DTNHost> {
 		}
 
 		return true;
-	}
-
-	 /**
-	 * Update the current location and notify all {@link MovementListener}s
-	 *
-	 * @param dx the delta in the x dimension
-	 * @param dy the delta in the y dimension
-	 */
-	private void updateLocation(final double dx, final double dy) {
-		this.location.translate(dx, dy);
-		notifyOfNewLocation();
-	}
-
-	/**
-	 * Update the current location and notify all {@link MovementListener}s
-	 * @param location the new location
-	 */
-	private void updateLocation(final Coord location) {
-		this.location.setLocation(location);
-		notifyOfNewLocation();
-	}
-
-	/**
-	 * Notify all attached {@link MovementListener} of the new location if this host.
-	 */
-	private void notifyOfNewLocation() {
-		if (this.movListeners == null) {
-			return;
-		}
-		for (final MovementListener l : this.movListeners) {
-			l.newLocation(this, this.location);
-		}
 	}
 
 	/**
