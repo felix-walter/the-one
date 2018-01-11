@@ -39,6 +39,12 @@ public class GroundStationInterface extends SimpleBroadcastInterface {
 	}
 
 	@Override
+	public void connect(NetworkInterface anotherInterface) {
+		if (anotherInterface instanceof SatelliteInterface)
+			super.connect(anotherInterface);
+	}
+
+	@Override
 	public NetworkInterface replicate() {
 		return new GroundStationInterface(this);
 	}
