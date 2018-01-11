@@ -92,7 +92,7 @@ public class SatelliteMovement extends MapRouteMovement implements SwitchableMov
 		this.stopDifference = proto.stopDifference;
 		this.nextRouteIndex = proto.nextRouteIndex;
 		this.allRoutes = new ArrayList<>(proto.allRoutes);
-		mRouteFileName	  = proto.mRouteFileName;
+		mRouteFileName = proto.mRouteFileName;
 	}
 
 	/**
@@ -101,7 +101,7 @@ public class SatelliteMovement extends MapRouteMovement implements SwitchableMov
 	 */
 	@Override
 	public Path getPath() {
-		Path p = new Path(1.0);
+		Path p = new Path(this.generateSpeed());
 		// don't take the first route, it's just there for connection purposes
 		if (nextRouteIndex >= allRoutes.size())
 			nextRouteIndex = 1;
@@ -135,7 +135,8 @@ public class SatelliteMovement extends MapRouteMovement implements SwitchableMov
 	 */
 	@Override
 	public Coord getInitialLocation() {
-		return getInitialPosition().clone();
+		// skip the first position which was just added for connectivity
+		return route.getStops().get(1).getLocation().clone();
 	}
 
 	@Override
@@ -146,7 +147,6 @@ public class SatelliteMovement extends MapRouteMovement implements SwitchableMov
 			return null;
 		}
 	}
-
 
 	@Override
 	public SatelliteMovement replicate() {
@@ -162,30 +162,16 @@ public class SatelliteMovement extends MapRouteMovement implements SwitchableMov
 	}
 
 	/**
-	 * get the initial position of the route
-	 * @return initial position of the route
-	 */
-	public Coord getInitialPosition() {
-		// skip the first position which was just added for connectivity
-		return route.getStops().get(1).getLocation();
-	}
-
-	/**
-	 * if router uses contact graph routing we only consider the max speed
-	 * Generates and returns a speed value between min and max of the
-	 * {@link #WAIT_TIME} setting.
-	 * @return A new speed between min and max values or the max speed
+	 * Returns a default speed value
 	 */
 	@Override
 	protected double generateSpeed() {
-		if (rng == null) {
-			return 1;
-		}
-		return (maxSpeed - minSpeed) * rng.nextDouble() + minSpeed;
+		// NOTE: The speed is provided via the path directly.
+		return 1;
 	}
 
 	/**
-	 * get speed in meter per second
+	 * Gets the speed of the satellite in meter per second
 	 * @param location
 	 * @param destination
 	 * @return
@@ -194,7 +180,7 @@ public class SatelliteMovement extends MapRouteMovement implements SwitchableMov
 		// returned distance is in m
 		double distance = location.distance(destination);
 		// stopDifference -> time in s needed for this distance
-		return distance/(double)stopDifference;
+		return distance / (double)stopDifference;
 	}
 
 	/**
