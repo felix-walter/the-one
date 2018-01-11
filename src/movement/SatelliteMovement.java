@@ -101,7 +101,7 @@ public class SatelliteMovement extends MapRouteMovement implements SwitchableMov
 	 */
 	@Override
 	public Path getPath() {
-		Path p = new Path(generateSpeed());
+		Path p = new Path(1.0);
 		// don't take the first route, it's just there for connection purposes
 		if (nextRouteIndex >= allRoutes.size())
 			nextRouteIndex = 1;
@@ -116,8 +116,14 @@ public class SatelliteMovement extends MapRouteMovement implements SwitchableMov
 		assert nodePath.size() > 0 : "No path from " + lastMapNode + " to " +
 				to + ". The simulation map isn't fully connected";
 
-		for (MapNode n : nodePath)
-			p.addWaypoint(n.getLocation());
+		MapNode last = null;
+		for (MapNode n : nodePath) {
+			if (last == null)
+				p.addWaypoint(n.getLocation()); // add the first waypoint w/o speed (defined by constructor)
+			else
+				p.addWaypoint(n.getLocation(), this.getSpeedFor(last.getLocation(), n.getLocation()));
+			last = n;
+		}
 
 		lastMapNode = to;
 		this.nextRouteIndex++;
@@ -184,7 +190,7 @@ public class SatelliteMovement extends MapRouteMovement implements SwitchableMov
 	 * @param destination
 	 * @return
 	 */
-	public double getSpeedFor(Coord location, Coord destination) {
+	protected double getSpeedFor(Coord location, Coord destination) {
 		// returned distance is in m
 		double distance = location.distance(destination);
 		// stopDifference -> time in s needed for this distance

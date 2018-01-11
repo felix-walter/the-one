@@ -443,10 +443,6 @@ public class DTNHost implements Comparable<DTNHost> {
 		this.destination = path.getNextWaypoint();
 		this.speed = path.getSpeed();
 
-		if (movement instanceof SatelliteMovement) {
-			this.speed = ((SatelliteMovement)movement).getSpeedFor(location, destination);
-		}
-
 		if (this.movListeners != null) {
 			for (MovementListener l : this.movListeners) {
 				l.newDestination(this, this.destination, this.speed);
