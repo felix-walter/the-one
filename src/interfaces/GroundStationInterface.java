@@ -49,6 +49,11 @@ public class GroundStationInterface extends SimpleBroadcastInterface {
 		return new GroundStationInterface(this);
 	}
 
+	@Override
+	protected double getDefaultTransmitRange() {
+		return 1.0;
+	}
+
 	public double getMinElevation() {
 		return min_elevation_degrees;
 	}

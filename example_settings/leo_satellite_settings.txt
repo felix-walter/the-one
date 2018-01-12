@@ -17,7 +17,6 @@ Group.nrofInterfaces = 1
 
 Sat228252Interface.type = SatelliteInterface
 Sat228252Interface.transmitSpeed = 15k
-Sat228252Interface.transmitRange = 281
 Sat228252Interface.altitude = 810320
 Sat228252Interface.interfaceType = GsSat
 
@@ -30,7 +29,6 @@ Group1.interface1 = Sat228252Interface
 
 Sat288954Interface.type = SatelliteInterface
 Sat288954Interface.transmitSpeed = 15k
-Sat288954Interface.transmitRange = 261
 Sat288954Interface.altitude = 692622
 Sat288954Interface.interfaceType = GsSat
 
@@ -43,7 +41,6 @@ Group2.interface1 = Sat288954Interface
 
 Sat278446Interface.type = SatelliteInterface
 Sat278446Interface.transmitSpeed = 15k
-Sat278446Interface.transmitRange = 284
 Sat278446Interface.altitude = 828061
 Sat278446Interface.interfaceType = GsSat
 
@@ -56,7 +53,6 @@ Group3.interface1 = Sat278446Interface
 
 Sat278488Interface.type = SatelliteInterface
 Sat278488Interface.transmitSpeed = 15k
-Sat278488Interface.transmitRange = 286
 Sat278488Interface.altitude = 836571
 Sat278488Interface.interfaceType = GsSat
 
@@ -69,7 +65,6 @@ Group4.interface1 = Sat278488Interface
 
 Sat3278910Interface.type = SatelliteInterface
 Sat3278910Interface.transmitSpeed = 15k
-Sat3278910Interface.transmitRange = 232
 Sat3278910Interface.altitude = 548823
 Sat3278910Interface.interfaceType = GsSat
 
@@ -85,7 +80,6 @@ internetInterface.transmitSpeed = 250k
 
 bs11Interface.type = GroundStationInterface
 bs11Interface.transmitSpeed = 15k
-bs11Interface.transmitRange = 286
 bs11Interface.interfaceType = GsSat
 bs11Interface.minElevation = 10
 
@@ -98,7 +92,6 @@ Group6.interface2 = internetInterface
 
 bs12Interface.type = GroundStationInterface
 bs12Interface.transmitSpeed = 15k
-bs12Interface.transmitRange = 286
 bs12Interface.interfaceType = GsSat
 bs12Interface.minElevation = 10
 
@@ -111,7 +104,6 @@ Group7.interface2 = internetInterface
 
 bs13Interface.type = GroundStationInterface
 bs13Interface.transmitSpeed = 15k
-bs13Interface.transmitRange = 286
 bs13Interface.interfaceType = GsSat
 bs13Interface.minElevation = 10
 
@@ -124,7 +116,6 @@ Group8.interface2 = internetInterface
 
 bs14Interface.type = GroundStationInterface
 bs14Interface.transmitSpeed = 15k
-bs14Interface.transmitRange = 286
 bs14Interface.interfaceType = GsSat
 bs14Interface.minElevation = 10
 
@@ -135,7 +126,6 @@ Group9.interface1 = bs14Interface
 
 bs15Interface.type = GroundStationInterface
 bs15Interface.transmitSpeed = 15k
-bs15Interface.transmitRange = 286
 bs15Interface.interfaceType = GsSat
 bs15Interface.minElevation = 10
 
@@ -146,7 +136,6 @@ Group10.interface1 = bs15Interface
 
 bs16Interface.type = GroundStationInterface
 bs16Interface.transmitSpeed = 15k
-bs16Interface.transmitRange = 286
 bs16Interface.interfaceType = GsSat
 bs16Interface.minElevation = 10
 
@@ -157,7 +146,6 @@ Group11.interface1 = bs16Interface
 
 bs17Interface.type = GroundStationInterface
 bs17Interface.transmitSpeed = 15k
-bs17Interface.transmitRange = 286
 bs17Interface.interfaceType = GsSat
 bs17Interface.minElevation = 10
 
@@ -168,7 +156,6 @@ Group12.interface1 = bs17Interface
 
 bs18Interface.type = GroundStationInterface
 bs18Interface.transmitSpeed = 15k
-bs18Interface.transmitRange = 286
 bs18Interface.interfaceType = GsSat
 bs18Interface.minElevation = 10
 
@@ -179,7 +166,6 @@ Group13.interface1 = bs18Interface
 
 bs19Interface.type = GroundStationInterface
 bs19Interface.transmitSpeed = 15k
-bs19Interface.transmitRange = 286
 bs19Interface.interfaceType = GsSat
 bs19Interface.minElevation = 10
 
@@ -190,7 +176,6 @@ Group14.interface1 = bs19Interface
 
 bs20Interface.type = GroundStationInterface
 bs20Interface.transmitSpeed = 15k
-bs20Interface.transmitRange = 286
 bs20Interface.interfaceType = GsSat
 bs20Interface.minElevation = 10
 

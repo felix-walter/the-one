@@ -71,6 +71,11 @@ public class SatelliteInterface extends SimpleBroadcastInterface {
 		return new SatelliteInterface(this);
 	}
 
+	@Override
+	protected double getDefaultTransmitRange() {
+		return 1.0;
+	}
+
 	public double getAltitude() {
 		return altitude;
 	}
