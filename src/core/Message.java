@@ -301,7 +301,7 @@ public class Message implements Comparable<Message> {
 		if (this.properties == null) {
 			return null;
 		}
-		return this.properties.get(key);
+		return this.properties.getOrDefault(key, null);
 	}
 
 	/**
