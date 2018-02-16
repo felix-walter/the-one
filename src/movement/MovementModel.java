@@ -44,6 +44,8 @@ public abstract class MovementModel {
 	public static final String WORLD_SIZE = "worldSize";
 	/** movement models' rng seed -setting id ({@value})*/
 	public static final String RNG_SEED = "rngSeed";
+	/** whether to "jump" directly to the initial location on new paths -setting id ({@value})*/
+	public static final String JUMP_TO_PATH_LOCATIONS_S = "jumpToInitialPathLocations";
 
 	/** common rng for all movement models in the simulation */
 	protected static Random rng;
@@ -62,6 +64,9 @@ public abstract class MovementModel {
 	private int maxY;
 
 	protected ModuleCommunicationBus comBus;
+
+	/** "Jump" to the first location on each new path provided via the movement instance */
+	protected boolean jumpToInitialPathLocations = true;
 
 	// static initialization of all movement models' random number generator
 	static {
@@ -132,6 +137,8 @@ public abstract class MovementModel {
 		this.maxX = worldSize[0];
 		this.maxY = worldSize[1];
 
+		this.jumpToInitialPathLocations = settings.getBoolean(JUMP_TO_PATH_LOCATIONS_S, false);
+
 		settings.restoreNameSpace();
 	}
 
@@ -149,6 +156,7 @@ public abstract class MovementModel {
 		this.maxY = mm.maxY;
 		this.ah = mm.ah;
 		this.comBus = null;
+		this.jumpToInitialPathLocations = mm.jumpToInitialPathLocations;
 	}
 
 	/**
@@ -255,6 +263,15 @@ public abstract class MovementModel {
 	 */
 	public ModuleCommunicationBus getComBus() {
 		return this.comBus;
+	}
+
+	/**
+	 * Returns whether the node location should be reset to the new initial location
+	 * when a new path is provided by the movement model
+	 * @return A boolean value indicating whether to set the position for each new path
+	 */
+	public boolean isJumpToInitialPathLocations() {
+		return this.jumpToInitialPathLocations;
 	}
 
 	/**

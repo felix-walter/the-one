@@ -36,9 +36,6 @@ public class DTNHost implements Comparable<DTNHost> {
 	private List<NetworkInterface> net;
 	private ModuleCommunicationBus comBus;
 
-	/** "Jump" to the first location on each new path provided via the movement instance */
-	protected static boolean jumpToInitialPathLocations = true;
-
 	static {
 		DTNSim.registerForReset(DTNHost.class.getCanonicalName());
 		reset();
@@ -420,7 +417,7 @@ public class DTNHost implements Comparable<DTNHost> {
 	private boolean setNextWaypoint() {
 		if (path == null) {
 			path = movement.getPath();
-			if (jumpToInitialPathLocations) {
+			if (this.movement.isJumpToInitialPathLocations()) {
 				// Snap to initial location of the new path
 				this.location.setLocation(path.getNextWaypoint());
 				this.speed = path.getSpeed();
