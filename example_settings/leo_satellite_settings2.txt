@@ -87,9 +87,8 @@ bs11Interface.minElevation = 10
 Group6.groupID = bs
 Group6.movementModel = StationaryMovement
 Group6.nodeLocation = 1007,1902
-Group6.nrofInterfaces = 2
+Group6.nrofInterfaces = 1
 Group6.interface1 = bs11Interface
-Group6.interface2 = internetInterface
 
 bs12Interface.type = GroundStationInterface
 bs12Interface.transmitSpeed = 15k
@@ -99,9 +98,8 @@ bs12Interface.minElevation = 10
 Group7.groupID = bs
 Group7.movementModel = StationaryMovement
 Group7.nodeLocation = 3416,570
-Group7.nrofInterfaces = 2
+Group7.nrofInterfaces = 1
 Group7.interface1 = bs12Interface
-Group7.interface2 = internetInterface
 
 bs13Interface.type = GroundStationInterface
 bs13Interface.transmitSpeed = 15k
@@ -111,9 +109,8 @@ bs13Interface.minElevation = 10
 Group8.groupID = bs
 Group8.movementModel = StationaryMovement
 Group8.nodeLocation = 2623,568
-Group8.nrofInterfaces = 2
+Group8.nrofInterfaces = 1
 Group8.interface1 = bs13Interface
-Group8.interface2 = internetInterface
 
 bs14Interface.type = GroundStationInterface
 bs14Interface.transmitSpeed = 15k
@@ -188,7 +185,7 @@ Group15.interface1 = bs20Interface
 Events.nrof = 1
 Events1.class = MessageEventGenerator
 Events1.interval = 10,30
-Events1.size = 500k,1M
+Events1.size = 1000k
 Events1.hosts = 5,15
 Events1.prefix = M
 
@@ -209,7 +206,7 @@ Report.nrofReports = 2
 Report.warmup = 0
 Report.reportDir = reports/
 Report.report1 = MessageStatsReport
-Report.report2 = ContactTimesReport
+Report.report2 = MessagePathReport
 
 GUI.UnderlayImage.fileName = data/satellite/world_map.png
 GUI.UnderlayImage.offset = 0,0
