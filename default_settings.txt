@@ -11,6 +11,9 @@ Scenario.updateInterval = 0.1
 # 43200s == 12h
 Scenario.endTime = 43200
 
+# World's size for Movement Models without implicit size (width, height; meters)
+MovementModel.worldSize = 4500, 3400
+
 
 ## Default settings for some routers
 
