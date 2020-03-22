@@ -417,6 +417,10 @@ Nodes (with active routing module) check every one minute whether some of
 their messages' TTLs have expired and drop such messages. If no TTL is
 defined, infinite TTL is used.
 
+concurrentTransmissions
+Whether or not to allow a host transmitting via several connections
+simultaneously.
+
 
 Group and movement model specific settings (only meaningful for certain
 movement models):
