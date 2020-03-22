@@ -359,6 +359,12 @@ Range (meters) of the interface.
 transmitSpeed
 Transmit speed of the interface (bytes per second).
 
+bidirectionalConnections
+Whether or not connections created by this interface are bidirectional (true, a
+shared link allowing only one transmission in either direction) or
+unidirectional (separate connections created for uplink and downlink, meaning
+uplink and downlink can transmit concurrently).
+
 
 Host group settings (used in Group or GroupN namespace):
 ---
